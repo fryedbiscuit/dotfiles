@@ -1,0 +1,51 @@
+#!syntax bash
+alias ,s='. ~/.bashrc' # Source bashrc
+alias ,c='$EDITOR $HOME/.bashrc' # Edit bashrc
+
+# Environment
+export TERMINAL=/usr/local/bin/st
+export EDITOR=/usr/bin/nvim
+export BROWSER=`which firefox`
+
+export ARCH=$(uname -m)
+export TERM_COLORS="$(tput colors)"
+export GPG_TTY=`tty`
+export DVTM_TERM=st
+
+export LUA_PATH="$HOME/git/lua-libs/?.lua;;"
+export PYTHONPATH="$HOME/git/python-libs"
+
+# Bash configuration
+	# Config prompt
+	PS1="\[\033[38;5;34m\]\u\[$(tput sgr0)\]\[\033[38;5;3m\]@\[$(tput sgr0)\]\h \[$(tput sgr0)\]\[\033[38;5;3m\]\w\[$(tput sgr0)\] \\$ \[$(tput sgr0)\]"
+
+	# Autocd when typing path
+	shopt -s autocd
+
+	# Vi-mode
+	set -o vi
+
+	# HISTFILE=~/.config/bash/history
+
+# Load source files
+export BASH_FOLDER="$HOME/.config/bash"
+
+if [ -d $BASH_FOLDER ] ; then
+	for f in $BASH_FOLDER/* ; do
+	source "$f"
+	done
+	unset f
+fi
+
+if [ -f /usr/share/nnn/quitcd/quitcd.bash_zsh ]; then
+    source /usr/share/nnn/quitcd/quitcd.bash_zsh
+fi
+# Shell-GPT integration BASH v0.1
+_sgpt_bash() {
+if [[ -n "$READLINE_LINE" ]]; then
+	READLINE_LINE=$(sgpt --shell <<< "$READLINE_LINE")
+    READLINE_POINT=${#READLINE_LINE}
+fi
+}
+bind -x '"\C-l": _sgpt_bash'
+# Shell-GPT integration BASH v0.1

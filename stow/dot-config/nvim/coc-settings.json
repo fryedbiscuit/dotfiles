@@ -1,0 +1,5 @@
+{
+    "coc.preferences.extensionUpdateCheck": "never",
+    "javascript.validate.enable": true,
+    "suggest.noselect": true
+}

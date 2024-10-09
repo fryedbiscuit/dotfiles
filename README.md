@@ -1,0 +1,2 @@
+# home-stow
+For dotfiles

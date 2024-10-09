@@ -1,0 +1,7 @@
+[user]
+	email = bloodyscythe404@gmail.com
+	name = Bloody-Scythe
+[init]
+    defaultBranch = main
+[hub]
+	protocol = ssh

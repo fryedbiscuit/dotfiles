@@ -1,0 +1,142 @@
+#!syntax bash
+# Reset sxhkd
+super + shift + s
+	pkill -10 sxhkd
+
+# Open terminal
+super + Return
+	$TERMINAL
+
+# Open terminal with dvtm
+super + Shift_R
+	$TERMINAL -e abduco -A dvtm
+
+# Lock Screen
+super + slash
+    slock
+
+# Open text editor with sxhkrc
+super + shift + slash
+	$TERMINAL -e nvim ~/.config/sxhkd/sxhkdrc
+
+# Toggle keyboard LED
+Scroll_Lock
+    xset q | grep -q 'Scroll Lock: off' && xset led named 'Scroll Lock' || xset -led named 'Scroll Lock'
+
+# toggle fullscreen
+#super + shift + f
+#	xdotool getwindowfocus windowstate --toggle FULLSCREEN
+
+# Force kill current program
+super + shift + q
+	kill -9 $(xdo pid)
+
+# Control audio volume
+XF86AudioRaiseVolume
+	pamixer -i 5
+XF86AudioLowerVolume
+	pamixer -d 5
+XF86AudioMute
+	pamixer -t
+
+super + equal
+	pamixer -i 5 --allow-boost
+super + minus
+	pamixer -d 5 --allow-boost
+super + plus
+	pamixer -t
+
+## Control backlight
+#XF86MonBrightnessUp
+#	light +
+#XF86MonBrightnessDown
+#	light -
+
+# Manage networking
+super + n
+	networkmanager_dmenu
+# Toggle picom
+super + shift + c
+    picom-toggle &
+	# if pgrep picom; then pkill picom ; else picom -b ; fi
+
+#OpenTableDriver
+super + shift + t
+    otd-toggle
+
+# Open mount manager (uses udisks2)
+super + shift + m
+	st -e bashmount
+
+# Open program
+super + d
+    dmenu_history -l 20
+super + p
+	rofi -show drun
+
+# Open browser
+super + w
+	firefox
+super + shift + w
+    firefox -P XXX
+
+# Open pulsemixer
+super + a
+	$TERMINAL -e pulsemixer
+
+# Open htop
+super + shift + h
+	$TERMINAL -e htop
+
+# Open Vifm
+super + v
+	$TERMINAL -e vifm
+
+# Open PCManFm
+super + shift + v
+	pcmanfm
+
+# Run screen script
+super + ctrl + s
+	screen
+
+# Vimwiki
+super + shift + n
+    obsidian &
+
+# Autoclicker
+super + KP_Insert
+	if pgrep autoclicker; then pkill autoclicker & else autoclicker; fi
+# Hold left mouse
+super + KP_Delete
+    xdotool mousedown 1
+# Hold right mouse
+super + KP_End
+    xdotool mousedown 3
+    # if [ -e "/tmp/clicked.lock" ]; then xdotool mouseup 1; rm "/tmp/clicked.lock"; else xdotool mousedown 1; touch "/tmp/clicked.lock"; fi
+# Hold "W" key
+super + KP_Down
+    xdotool keydown w
+
+# Screenshot
+Print
+    mkdir -p ~/Pictures/screenshots ; cd ~/Pictures/screenshots && scrot
+
+# Play youtube
+super + y
+    yt -r
+
+#=========# Controller #===========#
+#Kill window
+XF86AudioPrev
+    kill -9 $(xdo pid)
+
+# Press Ctrl-Tab
+XF86AudioPlay
+    xdotool keyup XF86AudioPlay key --clearmodifiers keydown ctrl keydown Tab keyup Tab keyup ctrl
+    # xdotool keyup XF86AudioPlay key --clearmodifiers key Pause
+
+# Press F12 (for scrennshots)
+XF86AudioNext
+    xdotool keyup XF86AudioNext key --clearmodifiers keydown apostrophe keyup apostrophe
+

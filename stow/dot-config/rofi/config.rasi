@@ -1,0 +1,5 @@
+configuration {
+ modi: "window,drun,ssh,combi";
+ font: "hack 10";
+ }
+@theme "/usr/share/rofi/themes/sidebar.rasi"
