@@ -5,7 +5,7 @@ alias ,c='$EDITOR $HOME/.bashrc' # Edit bashrc
 # Environment
 export TERMINAL=/usr/local/bin/st
 export EDITOR=/usr/bin/nvim
-export BROWSER=`which firefox`
+export BROWSER=firefox
 
 export ARCH=$(uname -m)
 export TERM_COLORS="$(tput colors)"
