@@ -14,10 +14,22 @@ export DVTM_TERM=st
 
 export LUA_PATH="$HOME/git/lua-libs/?.lua;;"
 export PYTHONPATH="$HOME/git/python-libs"
-
 # Bash configuration
-	# Config prompt
-	PS1="\[\033[38;5;34m\]\u\[$(tput sgr0)\]\[\033[38;5;3m\]@\[$(tput sgr0)\]\h \[$(tput sgr0)\]\[\033[38;5;3m\]\w\[$(tput sgr0)\] \\$ \[$(tput sgr0)\]"
+
+    #Git Prompt
+    . /usr/share/git/git-prompt.sh
+    GIT_PS1_DESCRIBE_STYLE='contains'
+    GIT_PS1_SHOWCOLORHINTS='y'
+    GIT_PS1_SHOWDIRTYSTATE='y'
+    GIT_PS1_SHOWSTASHSTATE='y'
+    GIT_PS1_SHOWUNTRACKEDFILES='y'
+    GIT_PS1_SHOWUPSTREAM='auto'
+
+    #Prompt
+    GREEN="\033[38;5;34m"
+    YELLOW="\033[38;5;3m"
+    CLEAR="\033[0m"
+    export PS1="\[$GREEN\]\u\[$CLEAR\]\[$YELLOW\]@\[$CLEAR\]\h \[$CLEAR\]\[$YELLOW\]\w\[$CLEAR\]\$(__git_ps1) \$ "
 
 	# Autocd when typing path
 	shopt -s autocd

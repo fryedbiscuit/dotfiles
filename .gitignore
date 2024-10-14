@@ -6,3 +6,4 @@ linux/.config/vifm/scripts/README
 linux/.config/nvim/plugged
 linux/.config/nvim/autoload
 stow/.config/vifm/vifminfo.json
+stow/dot-config/vifm/vifminfo.json
