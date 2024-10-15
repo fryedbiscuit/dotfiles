@@ -1,2 +1,4 @@
 #!/bin/bash
 alias ,t="$EDITOR $BASH_FOLDER/20-termux"
+
+pgrep sshd >> /dev/null || sshd

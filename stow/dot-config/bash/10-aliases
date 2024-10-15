@@ -31,6 +31,8 @@ alias la='ls -a'
 alias ll='ls -lh'
 alias lla='ls -lah'
 
+alias dvtm="TERM=dvtm-256color dvtm"
+alias vim=nvim
 alias cls='clear'
 alias lg='lazygit'
 alias nc='ncat'
