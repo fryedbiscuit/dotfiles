@@ -100,11 +100,13 @@ set vifminfo=dhistory,chistory,state,tui,shistory,
 	fileviewer *.[1-8] man ./%c | col -b
 
 	" Images
-	filetype *.bmp,*.jpg,*.jpeg,*.png,*.ico,*.tga
+	filextype *.bmp,*.jpg,*.jpeg,*.png,*.ico,*.tga
 	\ {Display in sxiv} sxiv %f,
-	\ {Display in icat} clear && icat %f && read -n1,
-	\ {Display in chafa} chafa --clear %f && read -n1,
-	\ {Display in fbi} fbi -a %f,
+	\ {Display in ffplay} ffplay %f,
+
+
+	filetype *.bmp,*.jpg,*.jpeg,*.png,*.ico,*.tga
+	\ {Display in timg} timg %f && read,
 
 	filetype *.gif
 	\ {Display in sxiv} sxiv -a %f,
@@ -224,6 +226,7 @@ set vifminfo=dhistory,chistory,state,tui,shistory,
 " === Remaps
 	noremap i   :!nvim %f -p<cr>
 	noremap o   :!xdg-open %f<cr>
+	noremap to  :!termux-open %f<cr>
 	noremap O   :file<cr>
 	noremap dr  :!dragon-drop -i -x -a %f<cr>
 	noremap dt  :!dragon-drop -t

@@ -5,7 +5,7 @@ super + shift + s
 
 # Open terminal
 super + Return
-	$TERMINAL
+	st
 
 # Open terminal with dvtm
 super + Shift_R
@@ -17,7 +17,7 @@ super + slash
 
 # Open text editor with sxhkrc
 super + shift + slash
-	$TERMINAL -e nvim ~/.config/sxhkd/sxhkdrc
+	st -e nvim ~/.config/sxhkd/sxhkdrc
 
 # Toggle keyboard LED
 Scroll_Lock
