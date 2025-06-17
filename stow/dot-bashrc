@@ -4,7 +4,7 @@ alias ,c='$EDITOR $HOME/.bashrc' # Edit bashrc
 
 # Environment
 export TERMINAL=/usr/local/bin/st
-export EDITOR=/usr/bin/nvim
+export EDITOR="$(which nvim)"
 export BROWSER=firefox
 
 export ARCH=$(uname -m)
