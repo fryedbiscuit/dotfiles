@@ -1,8 +1,0 @@
-#!/bin/bash
-alias ,cc="$EDITOR $BASH_FOLDER/*-completion"
-
-# Use bash-completion (arch package)
-[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
-
-# TLDR script completion
-isexec tldr && complete -W "$(tldr 2>/dev/null --list)" tldr

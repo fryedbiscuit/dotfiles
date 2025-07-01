@@ -1,7 +1,0 @@
-#!/bin/bash
-alias ,x="$EDITOR $BASH_FOLDER/*-xonly"
-
-if [ $DISPLAY ]; then
-    # MENU='rofi -dmenu'
-    PATH=$PATH
-fi

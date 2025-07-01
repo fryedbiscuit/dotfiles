@@ -1,8 +1,0 @@
-#!/bin/bash
-alias ,t="$EDITOR $BASH_FOLDER/20-termux"
-
-alias startx=termux-startx
-alias startvnc=termux-startvnc
-
-pgrep sshd >> /dev/null || sshd
-pfetch

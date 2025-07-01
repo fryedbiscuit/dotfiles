@@ -1,0 +1,106 @@
+isexec () { hash "$@" 2> /dev/null; }
+
+vifm()
+{
+	local dst="$(command vifm --choose-dir - "$@")"
+	if [ -z "$dst" ]; then
+		echo 'Directory picking cancelled/failed'
+		return 1
+	fi
+	cd "$dst"
+}
+
+where () {
+	hash "$@" 2> /dev/null
+	hash -t "$@" 2> /dev/null
+}
+
+appendpath () {
+    case ":$PATH:" in
+        *:"$1":*)
+            ;;
+        *)
+            PATH="$1:$PATH"
+    esac
+}
+
+## =========== ALIASES ============ ##
+	alias ,s='. ~/.bashrc' # Source bashrc
+	alias ,c='$EDITOR $HOME/.bashrc' # Edit bashrc
+
+	alias la='ls -a'
+	alias ll='ls -lh'
+	alias lla='ls -lah'
+
+	alias cls='clear'
+	alias lg='lazygit'
+	alias clgit='clustergit'
+	# alias tb='nc termbin.com 9999'
+	alias tb="(exec 3<>/dev/tcp/termbin.com/9999; cat >&3; cat <&3; exec 3<&-)"
+	alias bt='bluetoothctl'
+	alias suspend='systemctl suspend'
+
+	## ====== Overrides ========##
+	alias ls='ls --color'
+
+	## ======== Fasd ===========##
+	if isexec fasd ; then
+		alias j='fasd_cd -d'
+		alias v='fasd -f -e nvim'
+		alias sv='fasd -f -e "sudo nvim"'
+		alias vf='fasd -d -e vifm'
+		alias svf='fasd -d -e "sudo vifm"'
+		alias b='fasd -f -e bat'
+		alias o='fasd -a -e open'
+		alias h='fasd -a -e "handlr open"'
+	fi
+
+## ===========  PATH   ============ ##
+	appendpath "$HOME/git/scripts"
+	appendpath "$HOME/git/scripts/not_mine"
+	appendpath "$HOME/.nix-profile/bin"
+	appendpath "$HOME/bin"
+	appendpath "$HOME/.local/bin"
+
+
+## =========== CONFIG  ============ ##
+	export NIX_REMOTE=daemon
+	export TERMINAL=$(which st)
+	export EDITOR="$(which nvim)"
+
+	# Autocd when typing path
+	shopt -s autocd
+
+	# Vi-mode
+	set -o vi
+
+	# Git-prompt
+	isexec git-prompt && source git-prompt
+	GIT_PS1_DESCRIBE_STYLE='contains'
+	GIT_PS1_SHOWCOLORHINTS='y'
+	GIT_PS1_SHOWDIRTYSTATE='y'
+	GIT_PS1_SHOWSTASHSTATE='y'
+	GIT_PS1_SHOWUNTRACKEDFILES='y'
+	GIT_PS1_SHOWUPSTREAM='auto'
+
+	# PS1 Prompt
+	GREEN="\033[38;5;34m"
+	YELLOW="\033[38;5;3m"
+	CLEAR="\033[0m"
+	export PS1="\[$GREEN\]\u\[$CLEAR\]\[$YELLOW\]@\[$CLEAR\]\h \[$CLEAR\]\[$YELLOW\]\w\[$CLEAR\]\$(__git_ps1) \$ "
+
+	#Bash completion
+	[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
+	#TLDR command completion
+	isexec tldr && complete -W "$(tldr 2>/dev/null --list)" tldr
+
+	#Initiate fasd
+	isexec fasd && eval "$(fasd --init auto)"
+
+
+
+## ========= AUTOSTART  =========== ##
+	# Launch ssh-agent
+	pgrep ssh-agent > /dev/null || eval $(ssh-agent) > /dev/null
+
+
