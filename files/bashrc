@@ -74,20 +74,24 @@ appendpath () {
 	# Vi-mode
 	set -o vi
 
-	# Git-prompt
-	isexec git-prompt && source git-prompt
-	GIT_PS1_DESCRIBE_STYLE='contains'
-	GIT_PS1_SHOWCOLORHINTS='y'
-	GIT_PS1_SHOWDIRTYSTATE='y'
-	GIT_PS1_SHOWSTASHSTATE='y'
-	GIT_PS1_SHOWUNTRACKEDFILES='y'
-	GIT_PS1_SHOWUPSTREAM='auto'
-
 	# PS1 Prompt
 	GREEN="\033[38;5;34m"
 	YELLOW="\033[38;5;3m"
 	CLEAR="\033[0m"
-	export PS1="\[$GREEN\]\u\[$CLEAR\]\[$YELLOW\]@\[$CLEAR\]\h \[$CLEAR\]\[$YELLOW\]\w\[$CLEAR\]\$(__git_ps1) \$ "
+	export PS1="\[$GREEN\]\u\[$CLEAR\]\[$YELLOW\]@\[$CLEAR\]\h \[$CLEAR\]\[$YELLOW\]\w\[$CLEAR\] "
+
+	# Git-prompt
+    if isexec git-prompt
+    then
+        source git-prompt
+        GIT_PS1_DESCRIBE_STYLE='contains'
+        GIT_PS1_SHOWCOLORHINTS='y'
+        GIT_PS1_SHOWDIRTYSTATE='y'
+        GIT_PS1_SHOWSTASHSTATE='y'
+        GIT_PS1_SHOWUNTRACKEDFILES='y'
+        GIT_PS1_SHOWUPSTREAM='auto'
+        export PS1="$PS1\$(__git_ps1) \$ "
+    fi
 
 	#Bash completion
 	[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
