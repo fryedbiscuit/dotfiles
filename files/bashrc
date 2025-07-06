@@ -35,14 +35,14 @@ appendpath () {
 	alias cls='clear'
 	alias lg='lazygit'
 	alias clgit='clustergit'
+    alias tm='tmux new-session -A'
 	# alias tb='nc termbin.com 9999'
 	alias tb="(exec 3<>/dev/tcp/termbin.com/9999; cat >&3; cat <&3; exec 3<&-)"
 	alias bt='bluetoothctl'
-	alias suspend='systemctl suspend'
+
 
 	## ====== Overrides ========##
 	alias ls='ls --color'
-
 	## ======== Fasd ===========##
 	if isexec fasd ; then
 		alias j='fasd_cd -d'
@@ -106,5 +106,4 @@ appendpath () {
 ## ========= AUTOSTART  =========== ##
 	# Launch ssh-agent
 	pgrep ssh-agent > /dev/null || eval $(ssh-agent) > /dev/null
-
 
