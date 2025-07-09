@@ -1,0 +1,8 @@
+#!/bin/bash
+
+tput clear
+
+while true; do
+	printf "$(date +"%H:%M:%S %D")\r"
+	sleep 1
+done

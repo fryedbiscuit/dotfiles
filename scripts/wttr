@@ -1,0 +1,12 @@
+#!/bin/bash
+# change Palhoca to your default location
+location=${1:-"balneario_camboriu"}
+language=${2:-"en"}
+
+options="?Fqmo"
+# If terminal too small use narrow version
+[ "$(tput cols)" -lt 125 ] && options+='n'
+
+request="wttr.in/$location$options"
+
+curl -H "Accept-Language: $language" --compressed "$request"

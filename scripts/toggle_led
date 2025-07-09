@@ -1,0 +1,8 @@
+#!/bin/bash
+if [[ -e /tmp/led.lock ]]; then
+	rm /tmp/led.lock
+	xset -led 3
+else
+	touch /tmp/led.lock
+	xset led 3
+fi

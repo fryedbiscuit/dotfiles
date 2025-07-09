@@ -1,0 +1,27 @@
+#!/bin/sh
+isint () {
+	[ "$1" -eq "$1" ] 2> /dev/null
+}
+
+file=/sys/class/backlight/**/brightness
+val=$(cat $file)
+
+if [ "$1" = "+" ] ; then
+	val=`expr $val + 10`
+	echo $val | sudo tee $file
+elif [ "$1" = "-" ] ; then
+	val=`expr $val - 10`
+	echo $val | sudo tee $file
+elif isint "$1"; then
+	echo "$1" | sudo tee $file
+elif [ "$1" = "--help" ]; then
+	echo "Light: brighness adjustment script"
+	echo "	 +  : 5% more light"
+	echo "	 -  : 5% less light"
+	echo "	int : arbitrary light"
+	echo "	 *  : show current"
+else
+	echo "Light: $val%"
+fi
+
+

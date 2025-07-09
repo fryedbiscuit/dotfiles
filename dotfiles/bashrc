@@ -24,9 +24,15 @@ appendpath () {
     esac
 }
 
+# fzf_history () {
+#     READLINE_LINE="$(tac $HOME/.bash_history | fzf)"
+#     READLINE_POINT="${#READLINE_LINE}"
+# }
+
 ## =========== ALIASES ============ ##
 	alias ,s='. ~/.bashrc' # Source bashrc
 	alias ,c='$EDITOR $HOME/.bashrc' # Edit bashrc
+    alias ,t=" pushd ~;tmux new -A -s session;popd"
 
 	alias la='ls -a'
 	alias ll='ls -lh'
@@ -56,12 +62,10 @@ appendpath () {
 	fi
 
 ## ===========  PATH   ============ ##
-	appendpath "$HOME/git/scripts"
-	appendpath "$HOME/git/scripts/not_mine"
 	appendpath "$HOME/.nix-profile/bin"
-	appendpath "$HOME/bin"
 	appendpath "$HOME/.local/bin"
-
+	appendpath "$HOME/.cargo/bin"
+	appendpath "$HOME/bin"
 
 ## =========== CONFIG  ============ ##
 	export NIX_REMOTE=daemon
@@ -73,6 +77,11 @@ appendpath () {
 
 	# Vi-mode
 	set -o vi
+    
+    # Save history on every command
+    PROMPT_COMMAND='history -a'
+
+    # bind -x "\"\C-h\":\"fzf_history\""
 
 	# PS1 Prompt
 	GREEN="\033[38;5;34m"
@@ -95,12 +104,15 @@ appendpath () {
 
 	#Bash completion
 	[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
+
 	#TLDR command completion
 	isexec tldr && complete -W "$(tldr 2>/dev/null --list)" tldr
 
 	#Initiate fasd
 	isexec fasd && eval "$(fasd --init auto)"
 
+    #FZF completion and hotkeys
+    isexec fzf && eval "$(fzf --bash)"
 
 
 ## ========= AUTOSTART  =========== ##

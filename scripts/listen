@@ -1,0 +1,5 @@
+#!/bin/bash
+
+while true; do
+	sudo ncat -l $1 
+done

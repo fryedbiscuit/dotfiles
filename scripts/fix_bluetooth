@@ -1,0 +1,8 @@
+#!/bin/bash
+sudo systemctl stop bluetooth
+sudo rfkill block bluetooth
+sudo modprobe -r btusb
+sleep 1
+sudo modprobe btusb
+sudo systemctl start bluetooth
+sudo rfkill unblock bluetooth

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Set music directory
+
+dir="$HOME/Music"
+
+# Selects fist available player
+
+if hash mpv 2>/dev/null; then
+	mpv "$dir" --shuffle
+elif hash play 2>/dev/null; then
+	play "$dir/*"
+elif hash ffplay 2>/dev/null; then
+	find $dir -type f|shuf|sed "s/^/file \'/;s/$/\'/">/tmp/playlist-player
+	ffplay -f concat -safe 0 -i /tmp/playlist-player -autoexit
+else
+	echo "No known player available"
+fi

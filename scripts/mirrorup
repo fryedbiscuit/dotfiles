@@ -1,0 +1,13 @@
+#!/bin/sh
+if [ $(id -u) == 0 ]; then
+	reflector --verbose \
+	 --score 30 \
+	 --age 12 \
+	 --ipv4 \
+	 --protocol "http,https" \
+	 --country 'Brazil,' \
+	 --sort rate \
+	 --save /etc/pacman.d/mirrorlist
+else
+	echo "Please, run as root!"
+fi

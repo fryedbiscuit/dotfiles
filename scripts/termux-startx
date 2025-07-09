@@ -1,0 +1,7 @@
+#!/bin/bash
+
+#switch to Termux:X11 app
+am start --user 0 -n com.termux.x11/.MainActivity
+
+# start x11 server
+termux-x11 :0 -once -xstartup "$(which dwm)" -dpi 220

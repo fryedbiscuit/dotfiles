@@ -1,0 +1,14 @@
+#!/bin/bash
+isexec () {
+	hash "$@" 2> /dev/null
+}
+
+if isexec pacman; then
+	if isexec paru; then
+		paru -Syu
+	else
+		pacman --noconfirm -Syu
+	fi
+elif isexec pkg; then
+	pkg update && pkg update
+fi

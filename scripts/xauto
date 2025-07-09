@@ -1,0 +1,12 @@
+#!/bin/bash
+display_list=$(xrandr|grep ' connected'|cut -d' ' -f1)
+
+if [ -z "$*" ]; then
+	for display in $display_list ; do
+		xrandr --output "$display" --auto
+	done
+else
+	for display in $display_list ; do
+		xrandr --output "$display" $@
+	done
+fi

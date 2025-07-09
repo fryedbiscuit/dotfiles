@@ -1,0 +1,11 @@
+#!/bin/bash
+
+SAFE=${SAFE:-"$HOME/git/secret/safe"}
+
+if [ -e /tmp/lock.lock ]; then
+	fusermount -u "$HOME/Protected"
+	rm /tmp/lock.lock
+else
+	mkdir -p $HOME/Protected
+	encfs "$SAFE" "$HOME/Protected" && touch /tmp/lock.lock
+fi

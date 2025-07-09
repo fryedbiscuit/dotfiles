@@ -1,0 +1,7 @@
+#!/bin/bash
+time=${time:-"0.6"}
+button=${button:-"1"}
+window=$(xdotool getwindowfocus)
+while sleep $time; do
+	xdotool click --window $window $button
+done
