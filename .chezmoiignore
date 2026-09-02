@@ -1,0 +1,11 @@
+# Ignore desktop-only dotfiles when running on Termux
+{{- if eq .chezmoi.os "android" }}
+{{- end }}
+
+# Ignore mobile-specific files on standard Linux or macOS desktops
+{{- if ne .chezmoi.os "android" }}
+.termux/
+.local/share/bin/scripts/startx
+.local/share/bin/scripts/startvnc
+.local/share/bin/scripts/termux-setup
+{{- end }}
