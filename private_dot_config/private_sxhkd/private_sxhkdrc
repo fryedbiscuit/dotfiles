@@ -1,0 +1,52 @@
+#!syntax bash
+# Reset sxhkd
+alt + shift + s
+	pkill -10 sxhkd
+
+# Open terminal
+alt + Return
+	st
+
+# Kill window manager
+alt + ctrl + q
+    logout-wm
+
+# Open terminal with dvtm
+alt + Shift_R
+    st -e tmux new -A -s session
+
+# Open text editor with sxhkrc
+alt + shift + slash
+	st -e nvim ~/.config/sxhkd/sxhkdrc
+
+# Force kill current program
+alt + shift + q
+	kill -9 `xdotool getwindowfocus getwindowpid`
+
+# Open program
+alt + d
+	dmenu_history -l 20
+
+# Open browser
+alt + w
+	chromium
+
+# Open pulsemixer
+alt + a
+	st -e pulsemixer
+
+# Open htop
+alt + shift + h
+	st -e htop
+
+# Open Vifm
+alt + v
+	st -e vifm
+
+# Open PCManFm
+alt + shift + v
+	pcmanfm
+
+# Escape key emulation
+@XF86WWW
+	xdotool key Escape

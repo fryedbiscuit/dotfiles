@@ -1,0 +1,3 @@
+#!/bin/sh
+# Strip the shebang line, pass through prism, and run
+sed 1d "$1" | prism run -

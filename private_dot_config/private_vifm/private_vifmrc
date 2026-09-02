@@ -1,0 +1,182 @@
+"  === Basic configs
+    set mouse=a
+	set vicmd=nvim
+	set syscalls
+	set trash
+	set history=100
+    set nofollowlinks
+	" set fastrun
+	set sortnumbers
+	set undolevels=100
+	set novimhelp
+	" set vimhelp
+	set runexec
+	set timefmt=%m/%d\ %H:%M
+	set wildmenu
+	set wildstyle=popup
+	set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
+	set ignorecase
+	set smartcase
+	set nohlsearch
+	set incsearch
+	set scrolloff=4
+	set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
+
+" === What should be saved automatically between vifm sessions
+" set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
+"     \phistory,fhistory,dirstack,registers,bmarks
+set vifminfo=dhistory,chistory,state,tui,shistory,
+    \phistory,fhistory,dirstack,registers,bmarks
+
+" === Select colorscheme
+	let $_ = system('tput colors')
+	if $_ == "256"
+		colorscheme gruvbox
+	endif
+
+" === Marks
+	mark h ~/
+	mark j ~/Downloads
+    mark d /data
+
+" === Commands
+	" :com[mand][!] command_name action
+	" The following macros can be used in a command
+	" %a is replaced with the user arguments.
+	" %c the current file under the cursor.
+	" %C the current file under the cursor in the other directory.
+	" %f the current selected file, or files.
+	" %F the current selected file, or files in the other directory.
+	" %b same as %f %F.
+	" %d the current directory name.
+	" %D the other window directory name.
+	" %m run the command in a menu window
+
+	command! df df -h %m 2> /dev/null
+	command! diff nvim -d %f %F
+	command! zip zip -r %f.zip %f
+	command! run !! ./%f
+	command! make !!make %a
+	command! mkcd :mkdir %a | cd %a
+	command! reload :write | restart
+	command! sxiv sxiv -f -r -t %d
+	command! lg lazygit
+
+"Filetype associations
+
+	"Markdown
+	filetype *.md nvim %f -p
+
+	" Audio
+	filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus
+            \ {Play using mpv}  mpv %f,
+            \ {Play using ffplay} ffplay -autoexit %c,
+            \ {Play using sox} play -V1 %c,
+	fileviewer *.mp3 mp3info %c
+
+	" Video
+	filextype *.avi,*.mp4,*.wmv,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
+	    	\*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.qt,*.divx,*.as[fx]
+	    	\ {Play using mpv} mpv %f,
+        	\ {View using ffplay} ffplay -autoexit %f,
+
+	" Web
+	filextype *.html,*.htm,*.mhtml firefox %f
+
+	" Object
+	filetype *.o nm %f | less
+
+	" Windows executable
+	filetype *.exe
+	\ {Run with wine} wine %c,
+
+	" Man page
+	filetype *.[1-8] man ./%c
+	fileviewer *.[1-8] man ./%c | col -b
+
+	" Images
+	filextype *.bmp,*.jpg,*.jpeg,*.png,*.ico,*.tga
+	\ {Display in sxiv} sxiv %f,
+	\ {Display in ffplay} ffplay %f,
+
+	filetype *.bmp,*.jpg,*.jpeg,*.png,*.ico,*.tga
+	\ {Display in timg} timg %f && read,
+	\ {Set as android wallpaper} termux-wallpaper -l -f %f,
+
+	fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.ico,*.tga chafa --polite=on --size=%pwx%ph -f symbols %f
+
+	filetype *.gif
+	\ {Display in timg} timg %f && read,
+	\ {Set as android wallpaper} termux-wallpaper -l -f %f,
+
+
+	" Torrent
+	filetype *.torrent  aria2c %f &
+	fileviewer *.torrent dumptorrent -v %c
+
+	" Java jar
+	filetype *.jar
+	       \ {Run java file} java -jar %f,
+	       \ {Extract here} unzip %c,
+	       \ {View contents} zip -sf %c | less,
+
+	" Tar
+	filetype *.tar
+            \ {Extract with tar} tar -xf %c,
+	filetype *.tar.gz,*.tgz
+            \ {Extract with tar} tar -xzf %c,
+	filetype *.tar.bz2,*.tbz2
+            \ {Extract with tar} tar -xjf %c,
+	filetype *.tar.xz,*.txz
+            \ {Extract with tar} tar -xJf %c,
+
+	fileviewer *.tgz,*.tar.gz tar -tzf %c
+	fileviewer *.tar.bz2,*.tbz2 tar -tjf %c
+	fileviewer *.tar.txz,*.txz xz --list %c
+	fileviewer *.tar tar -tf %c
+
+	" 7z archives
+	filetype *.7z
+	       \ {Extract with 7z} 7z x %f,
+	fileviewer *.7z 7z l %c
+
+	" Epub files
+	filetype *.epub epr %f,
+                \   unzip %f
+
+    "Comic files
+	filetype *.cbz unzip %f
+
+" === Remaps
+	noremap i   :!nvim %f -p<cr>
+	noremap o   :!xdg-open %f<cr>
+	noremap to  :!termux-open %f<cr>
+	noremap O   :file<cr>
+	noremap zip :!zip -r %c".zip" %f<cr>
+
+	nnoremap slg :!lazygit<cr>
+	nnoremap sdu :!ncdu<cr>
+	nnoremap svi :!nvim -p %f<cr>
+	nnoremap ssh :shell<cr>
+	nnoremap svd :!vidir<cr>
+
+	" Make
+	nnoremap smm :!make<cr>
+	nnoremap smi :!make install<cr>
+	nnoremap smu :!make uninstall<cr>
+	nnoremap smc :!make clean<cr>
+
+	" Display sorting dialog
+	nnoremap S :sort<cr>
+
+	" Toggle visibility of preview window
+	nnoremap w :view<cr>
+	vnoremap w :view<cr>gv
+
+	" Mappings for faster renaming
+	nnoremap I cw<c-a>
+	nnoremap cc cw<c-u>
+	nnoremap A cw
+
+	" Open editor to edit vifmrc and apply settings after returning to vifm
+	nnoremap ,c :write | edit $MYVIFMRC | restart<cr>

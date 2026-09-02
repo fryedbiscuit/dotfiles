@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ "$TMUX" ]; then
+	cat | tmux load-buffer -w -
+elif [ "$DISPLAY" ]; then
+	cat | /data/data/com.termux/files/usr/bin/xclip
+else
+	cat | termux-clipboard-set
+fi

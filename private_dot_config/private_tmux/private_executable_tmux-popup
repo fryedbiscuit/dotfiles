@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ "$(tmux display-message -p -F "#{session_name}")" = "popup" ];then
+    tmux detach-client
+else
+    tmux popup -E -w80% -h80% "tmux new -As popup"
+fi
