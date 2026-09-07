@@ -70,6 +70,7 @@ appendpath () {
 	appendpath "$HOME/go/bin"
 	appendpath "$HOME/bin"
 	appendpath "$HOME/../usr/local/bin"
+	appendpath "$HOME/../usr/opt/c3"
 
 ## =========== CONFIG  ============ ##
 	export TERMINAL="$(which st)"
