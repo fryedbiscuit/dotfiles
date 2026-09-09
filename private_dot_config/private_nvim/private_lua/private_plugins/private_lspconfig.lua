@@ -18,12 +18,24 @@ return {
 			end,
 		}),
 
-		handlers = {
+		-- handlers = {
 		-- Suppress LSP-based diagnostics entirely
-		["textDocument/publishDiagnostics"] = function() end,
-		},
+		-- ["textDocument/publishDiagnostics"] = function() end,
+		-- },
 	})
 	vim.lsp.enable("clangd")
+
+	-- Define configuration for c3lsp
+	vim.lsp.config('c3_lsp', {
+		capabilities = capabilities,
+		cmd = { 'c3lsp' },
+		filetypes = { 'c3'},
+		root_markers = { 'project.json', 'manifest.json', '.git' },
+
+	})
+
+	-- Enable the server
+	vim.lsp.enable('c3_lsp')
 
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { silent = true })
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, { silent = true })
