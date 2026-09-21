@@ -1,0 +1,39 @@
+#!/bin/bash
+install-basics() {
+    BASICS="git gh chezmoi stow neovim wget ncurses-utils fzf make htop bat diff-so-fancy lazygit gopass moor tmux termux-api vifm openssh"
+    pacman -Syu base-devel $BASICS
+}
+
+if [ "$1" == "--basics" ]; then
+	install-basics
+elif [ "$1" == "--init" ]; then
+    pacman-key --init && pacman-key --populate
+cat << EOF >> $PREFIX/etc/pacman.conf
+
+[biscuit]
+SigLevel = Never
+Server = https://fryedbiscuit.github.io/biscuit-repo/termux
+EOF
+
+install-basics
+
+else
+    # Here start the initial step for installing the pacman bootstrap
+    # Download wget for downloading resources
+    yes|pkg install wget
+    #Go to the folder for termux files
+    pushd "$PREFIX/.."
+        #Download pacman bootstrap from github releases
+        wget `curl -s https://api.github.com/repos/termux-pacman/termux-packages/releases/latest | grep 'bootstrap-aarch64\.zip'  | tail -1 | cut -d : -f 2,3  | tr -d \"`
+
+        unzip bootstrap-aarch64.zip -d usr-n
+
+        pushd usr-n
+            cat SYMLINKS.txt | awk -F "←" '{system("ln -s '"'"'"$1"'"'"' '"'"'"$2"'"'"'")}'
+        popd
+
+        echo "BOOTSTRAP: Next, must reboot termux in failsafe mode."
+        echo "Must also manually remove usr folder and rename usr-n."
+        echo "After, you can run this script with the --init flag"
+    popd
+fi

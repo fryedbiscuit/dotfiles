@@ -73,9 +73,9 @@ appendpath () {
 	appendpath "$HOME/../usr/opt/c3"
 
 ## =========== CONFIG  ============ ##
-	export TERMINAL="$(which st)"
-	export EDITOR="$(which nvim)"
-	export PAGER="$(which moor)"
+	export TERMINAL="$(where st)"
+	export EDITOR="$(where nvim)"
+	export PAGER="$(where moor)"
 	export NIX_REMOTE=daemon
 	export SSH_AUTH_SOCK="$PREFIX"/var/run/ssh-agent.socket
 
