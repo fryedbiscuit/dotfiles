@@ -10,4 +10,4 @@ vim.opt.expandtab = false
 vim.opt.ignorecase = true   -- Ignore case in search...
 vim.opt.splitright = true
 vim.opt.splitbelow = true
-vim.opt.updatetime = 300
+vim.opt.updatetime = 500

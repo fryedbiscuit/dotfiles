@@ -1,6 +1,6 @@
 local nest = require("nest")
 
-require"nest".applyKeymaps({",r", "<cmd>w<cr><cmd>!tcc -run %<cr>"})
+require"nest".applyKeymaps({",r", "<cmd>w<cr><cmd>!./%<cr>"})
 
 local function toggle_loclist()
   local is_open = vim.fn.getloclist(0, { winid = 0 }).winid ~= 0
@@ -15,6 +15,7 @@ local function toggle_loclist()
 end
 
 nest.applyKeymaps {
+	{'<Esc>', '<cmd>nohlsearch<CR>'},
 	{ ",", 
 		{ "c", "<cmd>tabnew<cr><cmd>e ~/.config/nvim/init.lua<cr>", options = { desc = "Edit neovim config" } },
 		{ "k", "<cmd>tabnew<cr><cmd>e ~/.config/nvim/lua/config/keymaps.lua<cr>", options = { desc = "Edit keymaps" } },

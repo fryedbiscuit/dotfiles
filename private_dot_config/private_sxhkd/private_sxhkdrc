@@ -5,7 +5,7 @@ alt + shift + s
 
 # Open terminal
 alt + Return
-	st
+	$TERMINAL
 
 # Kill window manager
 alt + ctrl + q
@@ -13,11 +13,11 @@ alt + ctrl + q
 
 # Open terminal with dvtm
 alt + Shift_R
-    st -e tmux new -A -s session
+    $TERMINAL -e tmux new -A -s session
 
 # Open text editor with sxhkrc
 alt + shift + slash
-	st -e nvim ~/.config/sxhkd/sxhkdrc
+	$TERMINAL -e nvim ~/.config/sxhkd/sxhkdrc
 
 # Force kill current program
 alt + shift + q
@@ -29,19 +29,19 @@ alt + d
 
 # Open browser
 alt + w
-	chromium
+	chromium-browser
 
 # Open pulsemixer
 alt + a
-	st -e pulsemixer
+	$TERMINAL -e pulsemixer
 
 # Open htop
 alt + shift + h
-	st -e htop
+	$TERMINAL -e htop
 
 # Open Vifm
 alt + v
-	st -e vifm
+	$TERMINAL -e vifm
 
 # Open PCManFm
 alt + shift + v
