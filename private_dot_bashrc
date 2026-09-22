@@ -73,7 +73,6 @@ appendpath () {
 	appendpath "$HOME/../usr/opt/c3"
 
 ## =========== CONFIG  ============ ##
-	export TERMINAL="$(where st)"
 	export EDITOR="$(where nvim)"
 	export PAGER="$(where moor)"
 	export NIX_REMOTE=daemon

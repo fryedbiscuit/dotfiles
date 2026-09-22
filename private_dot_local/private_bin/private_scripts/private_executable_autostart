@@ -2,7 +2,7 @@
 
 # Settings
 setxkbmap -layout br,br -variant "nodeadkeys," -option 'grp:ctrl_space_toggle' &
-~/.fehbg
+nitrogen --restore
 
 #Autostarts
 sxhkd &

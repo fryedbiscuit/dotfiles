@@ -1,7 +1,6 @@
 require("modules.lazy")
 require("modules.keymaps")
 require("modules.filetype")
-require("modules.lint")
 
 vim.opt.number = true       -- Show line numbers
 vim.opt.relativenumber = true -- Relative line numbers
