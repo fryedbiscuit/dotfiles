@@ -1,0 +1,11 @@
+#!/bin/bash
+# export GALLIUM_DRIVER=llvmpipe
+export MESA_LOADER_DRIVER_OVERRIDE=virpipe
+export GALLIUM_DRIVER=virpipe
+export MESA_GL_VERSION_OVERRIDE=4.0
+
+virgl_test_server_android &
+
+dwm
+
+pkill -f -9 virgl_test_server_android
