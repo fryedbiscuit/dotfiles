@@ -1,2 +1,0 @@
-#!/bin/bash
-proot-distro login archlinux --shared-tmp --termux-home --env "DISPLAY=:0" -- calibre
