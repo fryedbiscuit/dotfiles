@@ -64,6 +64,7 @@ set vifminfo=dhistory,chistory,state,tui,shistory,
 
 "Filetype associations
 
+	fileviewer *.gpg gpg -d %c
 	"Markdown
 	filetype *.md nvim %f -p
 
@@ -128,11 +129,11 @@ set vifminfo=dhistory,chistory,state,tui,shistory,
 	filetype *.tar.bz2,*.tbz2
             \ {Extract with tar} tar -xjf %c,
 	filetype *.tar.xz,*.txz
-            \ {Extract with tar} tar -xJf %c,
+            \ {Extract with tar} tar -xJf "%c",
 
 	fileviewer *.tgz,*.tar.gz tar -tzf %c
 	fileviewer *.tar.bz2,*.tbz2 tar -tjf %c
-	fileviewer *.tar.txz,*.txz xz --list %c
+	fileviewer *.tar.xz,*.txz tar -tJf %c
 	fileviewer *.tar tar -tf %c
 
 	" 7z archives

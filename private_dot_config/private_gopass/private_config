@@ -1,2 +1,2 @@
 [mounts]
-	path = /data/data/com.termux/files/home/.password-store
+	path = ~/.password-store
