@@ -120,6 +120,10 @@ set vifminfo=dhistory,chistory,state,tui,shistory,
 	       \ {Run java file} java -jar %f,
 	       \ {Extract here} unzip %c,
 	       \ {View contents} zip -sf %c | less,
+"
+	" Zip archive
+	filetype *.zip
+	       \ {Extract here} unzip %c
 
 	" Tar
 	filetype *.tar
